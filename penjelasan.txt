@@ -1,0 +1,385 @@
+Saya sedang membuat project sekolah berbasis PHP Native + MySQL bernama "Agenda Kelas". Tolong anggap ini adalah project nyata dan gunakan spesifikasi berikut sebagai acuan utama. Jangan mengubah struktur, alur, database, maupun arsitektur kecuali jika memang ada kesalahan fatal.
+
+=========================================
+TUJUAN SISTEM
+=========================================
+
+Agenda Kelas adalah sistem digital untuk membantu pengelolaan agenda dan kehadiran kelas.
+
+Fokus utama sistem ini bukan pada agenda kegiatan, melainkan pada pencatatan kehadiran harian siswa secara digital.
+
+Data yang sering dicatat:
+
+- Hadir
+- Sakit
+- Izin
+- Dispen
+- Alfa
+
+Sistem juga memiliki fitur validasi oleh guru menggunakan QR Code agar data absensi yang dimasukkan sekretaris dapat diverifikasi.
+
+=========================================
+ROLE USER
+=========================================
+
+Terdapat 4 role:
+
+1. Siswa
+2. Sekretaris
+3. Guru
+4. Wali Kelas
+
+=========================================
+ALUR SISTEM
+=========================================
+
+Landing Page
+↓
+Login
+↓
+Validasi akun
+↓
+Cek role user
+↓
+Redirect ke folder masing-masing
+
+siswa      -> siswa/dashboard.php
+sekretaris -> sekre/dashboard.php
+guru       -> guru/dashboard.php
+walikelas  -> walikelas/dashboard.php
+
+=========================================
+FITUR SISWA
+=========================================
+
+- Dashboard
+- Melihat Agenda Kelas
+- Melihat Detail Agenda
+- Melihat Riwayat Kehadiran
+- Melihat Status Kehadiran
+- Melihat Profile
+- Mengubah Foto Profile
+- Mengubah Password
+- Logout
+
+=========================================
+FITUR SEKRETARIS
+=========================================
+
+- Dashboard
+- Kelola Agenda ( include hapus agenda sweetalert2 )
+- Tambah Agenda
+- Edit Agenda
+- Kelola Kehadiran
+- Input Sakit
+- Input Izin
+- Input Dispen
+- Input Alfa
+- Generate QR Validasi
+- Melihat Riwayat Validasi
+- Profile
+- Logout
+
+=========================================
+FITUR GURU
+=========================================
+
+- Dashboard
+- Scan QR Validasi
+- Validasi Kehadiran
+- Melihat Riwayat Validasi
+- Profile
+- Logout
+
+=========================================
+FITUR WALI KELAS
+=========================================
+
+- Dashboard
+- Monitoring Kehadiran
+- Melihat Riwayat Kehadiran
+- Melihat Statistik Kehadiran
+- Export Laporan PDF / Excel
+- Profile
+- Logout
+
+=========================================
+ALUR ABSENSI
+=========================================
+
+Sekretaris login
+
+↓
+
+Membuat absensi harian
+
+↓
+
+Sistem mengambil seluruh siswa dalam kelas
+
+↓
+
+Semua siswa otomatis dianggap HADIR
+
+↓
+
+Sekretaris hanya mengubah siswa yang:
+
+- Sakit
+- Izin
+- Dispen
+- Alfa
+
+↓
+
+Simpan
+
+↓
+
+Generate QR Validasi
+
+↓
+
+Guru melakukan scan QR
+
+↓
+
+Guru memvalidasi data
+
+↓
+
+Status validasi tersimpan
+
+↓
+
+Wali Kelas dapat melihat hasil monitoring dan laporan
+
+=========================================
+DATABASE
+=========================================
+
+Database menggunakan MySQL.
+
+Tabel utama:
+
+1. users
+2. kelas
+3. siswa
+4. agenda
+5. absensi_harian
+6. detail_absensi
+7. validasi_qr
+
+Role pada tabel users:
+
+- siswa
+- sekretaris
+- guru
+- walikelas
+
+Data siswa minimal:
+
+- NIS
+- Nama Lengkap
+- Nomor Absen
+- Jenis Kelamin
+- Tempat Lahir
+- Tanggal Lahir
+- Alamat
+- No HP
+- Foto
+- Kelas
+
+Status absensi:
+
+- hadir
+- sakit
+- izin
+- dispen
+- alfa
+
+Status validasi QR:
+
+- pending
+- valid
+- ditolak
+
+=========================================
+STRUKTUR PROJECT
+=========================================
+
+Gunakan struktur berikut dan jangan mengubahnya tanpa alasan kuat:
+
+agenda-kelas/
+
+├── index.php
+├── login.php
+├── logout.php
+
+├── config/
+│   ├── database.php
+│   └── session.php
+
+├── includes/
+│   ├── navbar.php
+│   ├── sidebar.php
+│   ├── footer.php
+│   ├── auth.php
+│   └── functions.php
+
+├── siswa/
+│   ├── dashboard.php
+│   ├── agenda.php
+│   ├── detail_agenda.php
+│   ├── riwayat_kehadiran.php
+│   └── profile.php
+
+├── sekre/
+│   ├── dashboard.php
+│   ├── agenda.php
+│   ├── agenda_tambah.php
+│   ├── agenda_edit.php
+│   ├── absensi.php
+│   ├── generate_qr.php
+│   ├── riwayat_validasi.php
+│   └── profile.php
+
+├── guru/
+│   ├── dashboard.php
+│   ├── scan_qr.php
+│   ├── validasi.php
+│   ├── riwayat_validasi.php
+│   └── profile.php
+
+├── walikelas/
+│   ├── dashboard.php
+│   ├── monitoring.php
+│   ├── statistik.php
+│   ├── riwayat_kehadiran.php
+│   ├── export.php
+│   └── profile.php
+
+├── uploads/
+│   ├── profile/
+│   └── qr/
+
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── img/
+
+=========================================
+KONSEP NAVBAR
+=========================================
+
+Navbar digunakan di seluruh halaman.
+
+Navbar harus menampilkan:
+
+- Judul halaman
+- Subjudul halaman
+- Foto profile user
+- Nama user
+
+Saat nama user diklik, muncul dropdown:
+
+- Dashboard
+- Profile
+- Logout
+
+Judul dan subjudul navbar harus dinamis berdasarkan halaman yang sedang dibuka.
+
+Contoh:
+
+Dashboard
+Ringkasan aktivitas hari ini
+
+atau
+
+Kelola Kehadiran
+Kelola absensi harian siswa
+
+Gunakan variabel:
+
+$page_title
+$page_subtitle
+
+agar navbar otomatis menampilkan judul sesuai halaman.
+
+=========================================
+KONSEP SIDEBAR
+=========================================
+
+Sidebar hanya satu file:
+
+includes/sidebar.php
+
+Sidebar harus membaca:
+
+$_SESSION['role']
+
+Kemudian menampilkan menu yang sesuai dengan role user.
+
+Contoh:
+
+Jika role = siswa
+
+Tampilkan:
+
+- Dashboard
+- Agenda Kelas
+- Riwayat Kehadiran
+- Profile
+
+Jika role = guru
+
+Tampilkan:
+
+- Dashboard
+- Scan QR
+- Validasi Kehadiran
+- Riwayat Validasi
+- Profile
+
+dan seterusnya.
+
+=========================================
+AUTENTIKASI
+=========================================
+
+Gunakan session PHP.
+
+Saat login berhasil:
+
+$_SESSION['id']
+$_SESSION['nama']
+$_SESSION['role']
+
+Semua halaman harus melewati auth.php.
+
+Jika belum login:
+
+Redirect ke login.php
+
+Jika role tidak sesuai:
+
+Redirect ke dashboard masing-masing.
+
+=========================================
+STYLE PENGEMBANGAN
+=========================================
+
+- tiap ingin menghapus sesuatu itu menggunakan fitur sweetalert2 , jadi gaperlu di file baru lagi.
+- PHP Native
+- MySQL
+- Bootstrap 5
+- font nya menggunakan "navada"
+- Tidak menggunakan framework
+- Tidak menggunakan MVC
+- Fokus pada kode yang rapi dan mudah dipahami siswa SMK
+- Gunakan include untuk navbar, sidebar, footer
+- Gunakan prepared statement
+- Struktur sederhana namun profesional
+- Semua kode harus siap dijalankan di XAMPP
+
+Berdasarkan spesifikasi di atas, bantu saya membangun project Agenda Kelas secara bertahap dengan kode yang rapi, lengkap, dan konsisten dengan seluruh requirement.

@@ -1,0 +1,84 @@
+Sekretaris
+↓
+Klik "Buat Absensi Hari Ini"
+
+Sistem otomatis:
+↓
+Mengambil seluruh siswa dalam kelas
+↓
+Mengisi semua status = hadir
+
+Sekretaris hanya mengubah:
+↓
+Sakit
+Izin
+Dispen
+Alfa
+
+Generate QR
+↓
+Guru Scan
+↓
+Validasi
+↓
+Wali Kelas Melihat Rekap
+
+
+
+agenda-kelas/
+
+├── index.php
+├── login.php
+├── logout.php
+
+├── config/
+│   ├── database.php
+│   └── session.php
+
+├── includes/
+│   ├── navbar.php
+│   ├── sidebar.php
+│   ├── footer.php
+│   ├── auth.php
+│   └── functions.php
+
+├── siswa/
+│   ├── dashboard.php
+│   ├── agenda.php
+│   ├── detail_agenda.php
+│   ├── riwayat_kehadiran.php
+│   └── profile.php
+
+├── sekre/
+│   ├── dashboard.php
+│   ├── agenda.php( include hapus agenda )
+│   ├── agenda_tambah.php
+│   ├── agenda_edit.php
+│   ├── absensi.php
+│   ├── generate_qr.php
+│   ├── riwayat_validasi.php
+│   └── profile.php
+
+├── guru/
+│   ├── dashboard.php
+│   ├── scan_qr.php
+│   ├── validasi.php
+│   ├── riwayat_validasi.php
+│   └── profile.php
+
+├── walikelas/
+│   ├── dashboard.php
+│   ├── monitoring.php
+│   ├── statistik.php
+│   ├── riwayat_kehadiran.php
+│   ├── export.php
+│   └── profile.php
+
+├── uploads/
+│   ├── profile/
+│   └── qr/
+
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── img/

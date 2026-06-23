@@ -1,0 +1,134 @@
+-- =====================================================
+-- RESET DATABASE & INSERT DATA BARU
+-- Kelas: XI RPL 1
+-- =====================================================
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Hapus semua data
+TRUNCATE detail_absensi;
+TRUNCATE validasi_qr;
+TRUNCATE absensi_harian;
+TRUNCATE siswa;
+TRUNCATE agenda;
+TRUNCATE kelas;
+TRUNCATE users;
+
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- =====================================================
+-- 1. INSERT USERS
+-- =====================================================
+
+-- Wali Kelas
+INSERT INTO users (id, nama, email, password, role, created_at) VALUES
+(1, 'Pa Fajar S.pd M.pd', 'walikelas@sekolah.com', '123456', 'walikelas', NOW());
+
+-- Guru
+INSERT INTO users (id, nama, email, password, role, created_at) VALUES
+(2, 'Pa Jul INGGRIS', 'guru@sekolah.com', '123456', 'guru', NOW());
+
+-- Sekretaris (2 orang)
+INSERT INTO users (id, nama, email, password, role, created_at) VALUES
+(3, 'Yuniyasih', 'yuniyasih@sekolah.com', '123456', 'sekretaris', NOW()),
+(4, 'Rizal Herdiana Yuniar', 'rizal@sekolah.com', '123456', 'sekretaris', NOW());
+
+-- Siswa (33 siswa, termasuk Yuniyasih dan Rizal sebagai siswa juga)
+INSERT INTO users (id, nama, email, password, role, created_at) VALUES
+(5, 'Andika Ali Gussalam', 'andika@sekolah.com', '123456', 'siswa', NOW()),
+(6, 'Azka Yaqiz', 'azka@sekolah.com', '123456', 'siswa', NOW()),
+(7, 'Azzura Lavasha Dewi', 'azzura@sekolah.com', '123456', 'siswa', NOW()),
+(8, 'Dara Tri Yuliani', 'dara@sekolah.com', '123456', 'siswa', NOW()),
+(9, 'Desta Adila Kusuma', 'desta@sekolah.com', '123456', 'siswa', NOW()),
+(10, 'Dika Saputra Sunandar', 'dika@sekolah.com', '123456', 'siswa', NOW()),
+(11, 'Evan Raka Riadi', 'evan@sekolah.com', '123456', 'siswa', NOW()),
+(12, 'Fauzi Muhammad', 'fauzi@sekolah.com', '123456', 'siswa', NOW()),
+(13, 'Fitra Anzani', 'fitra@sekolah.com', '123456', 'siswa', NOW()),
+(14, 'Ghaizan Nazar Tirtawidjaya', 'ghaizan@sekolah.com', '123456', 'siswa', NOW()),
+(15, 'Ghiyyas Samia Astamanggala', 'ghiyyas@sekolah.com', '123456', 'siswa', NOW()),
+(16, 'Hacdik Septian', 'hacdik@sekolah.com', '123456', 'siswa', NOW()),
+(17, 'Isa', 'isa@sekolah.com', '123456', 'siswa', NOW()),
+(18, 'Keisha Felony Putri', 'keisha@sekolah.com', '123456', 'siswa', NOW()),
+(19, 'Kiren Rahmadhania Putri', 'kiren@sekolah.com', '123456', 'siswa', NOW()),
+(20, 'M. Rizky Firmansyah', 'rizky@sekolah.com', '123456', 'siswa', NOW()),
+(21, 'Marwa Dwi Sivana', 'marwa@sekolah.com', '123456', 'siswa', NOW()),
+(22, 'Melbya Tus Siva', 'melbya@sekolah.com', '123456', 'siswa', NOW()),
+(23, 'Mizan Achmad Alfahrezi', 'mizan@sekolah.com', '123456', 'siswa', NOW()),
+(24, 'Mochamad Alfin Fauzan', 'alfin@sekolah.com', '123456', 'siswa', NOW()),
+(25, 'M. Ikmal Nur Fajar', 'ikmal@sekolah.com', '123456', 'siswa', NOW()),
+(26, 'M. Faza Faturrahman', 'faza@sekolah.com', '123456', 'siswa', NOW()),
+(27, 'M. Rasya Raka Pratama', 'rasya@sekolah.com', '123456', 'siswa', NOW()),
+(28, 'Resti Indiani', 'resti@sekolah.com', '123456', 'siswa', NOW()),
+(29, 'Revan Ramadhan', 'revan@sekolah.com', '123456', 'siswa', NOW()),
+(30, 'Rian Rama Romansah', 'rian@sekolah.com', '123456', 'siswa', NOW()),
+(31, 'Rianto', 'rianto@sekolah.com', '123456', 'siswa', NOW()),
+(32, 'Ridwan Sahidi Nugraha', 'ridwan@sekolah.com', '123456', 'siswa', NOW()),
+(33, 'Sandi Darma Kusuma', 'sandi@sekolah.com', '123456', 'siswa', NOW()),
+(34, 'Sifa Nurul Insani', 'sifa@sekolah.com', '123456', 'siswa', NOW()),
+(35, 'Syahrul Firmansyah', 'syahrul@sekolah.com', '123456', 'siswa', NOW()),
+(36, 'Yuniyasih', 'yuniyasih_siswa@sekolah.com', '123456', 'siswa', NOW()),
+(37, 'Rizal Herdiana Yuniar', 'rizal_siswa@sekolah.com', '123456', 'siswa', NOW());
+
+-- =====================================================
+-- 2. INSERT KELAS
+-- =====================================================
+INSERT INTO kelas (id, nama_kelas, walikelas_id, created_at) VALUES
+(1, 'XI RPL 1', 1, NOW());
+
+-- =====================================================
+-- 3. INSERT SISWA (urutan absen 1-33)
+-- =====================================================
+INSERT INTO siswa (id, user_id, kelas_id, nis, nama_lengkap, nomor_absen, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat, no_hp, created_at) VALUES
+(1, 5, 1, '2425101001', 'Andika Ali Gussalam', 1, 'L', 'Jakarta', '2007-01-01', 'Jl. Merdeka No.1', '081234567891', NOW()),
+(2, 6, 1, '2425101002', 'Azka Yaqiz', 2, 'L', 'Jakarta', '2007-01-02', 'Jl. Merdeka No.2', '081234567892', NOW()),
+(3, 7, 1, '2425101003', 'Azzura Lavasha Dewi', 3, 'P', 'Jakarta', '2007-01-03', 'Jl. Merdeka No.3', '081234567893', NOW()),
+(4, 8, 1, '2425101004', 'Dara Tri Yuliani', 4, 'P', 'Jakarta', '2007-01-04', 'Jl. Merdeka No.4', '081234567894', NOW()),
+(5, 9, 1, '2425101005', 'Desta Adila Kusuma', 5, 'P', 'Jakarta', '2007-01-05', 'Jl. Merdeka No.5', '081234567895', NOW()),
+(6, 10, 1, '2425101006', 'Dika Saputra Sunandar', 6, 'L', 'Jakarta', '2007-01-06', 'Jl. Merdeka No.6', '081234567896', NOW()),
+(7, 11, 1, '2425101007', 'Evan Raka Riadi', 7, 'L', 'Jakarta', '2007-01-07', 'Jl. Merdeka No.7', '081234567897', NOW()),
+(8, 12, 1, '2425101008', 'Fauzi Muhammad', 8, 'L', 'Jakarta', '2007-01-08', 'Jl. Merdeka No.8', '081234567898', NOW()),
+(9, 13, 1, '2425101009', 'Fitra Anzani', 9, 'L', 'Jakarta', '2007-01-09', 'Jl. Merdeka No.9', '081234567899', NOW()),
+(10, 14, 1, '2425101010', 'Ghaizan Nazar Tirtawidjaya', 10, 'L', 'Jakarta', '2007-01-10', 'Jl. Merdeka No.10', '081234567900', NOW()),
+(11, 15, 1, '2425101011', 'Ghiyyas Samia Astamanggala', 11, 'L', 'Jakarta', '2007-01-11', 'Jl. Merdeka No.11', '081234567901', NOW()),
+(12, 16, 1, '2425101012', 'Hacdik Septian', 12, 'L', 'Jakarta', '2007-01-12', 'Jl. Merdeka No.12', '081234567902', NOW()),
+(13, 17, 1, '2425101013', 'Isa', 13, 'L', 'Jakarta', '2007-01-13', 'Jl. Merdeka No.13', '081234567903', NOW()),
+(14, 18, 1, '2425101014', 'Keisha Felony Putri', 14, 'P', 'Jakarta', '2007-01-14', 'Jl. Merdeka No.14', '081234567904', NOW()),
+(15, 19, 1, '2425101015', 'Kiren Rahmadhania Putri', 15, 'P', 'Jakarta', '2007-01-15', 'Jl. Merdeka No.15', '081234567905', NOW()),
+(16, 20, 1, '2425101016', 'M. Rizky Firmansyah', 16, 'L', 'Jakarta', '2007-01-16', 'Jl. Merdeka No.16', '081234567906', NOW()),
+(17, 21, 1, '2425101017', 'Marwa Dwi Sivana', 17, 'P', 'Jakarta', '2007-01-17', 'Jl. Merdeka No.17', '081234567907', NOW()),
+(18, 22, 1, '2425101018', 'Melbya Tus Siva', 18, 'P', 'Jakarta', '2007-01-18', 'Jl. Merdeka No.18', '081234567908', NOW()),
+(19, 23, 1, '2425101019', 'Mizan Achmad Alfahrezi', 19, 'L', 'Jakarta', '2007-01-19', 'Jl. Merdeka No.19', '081234567909', NOW()),
+(20, 24, 1, '2425101020', 'Mochamad Alfin Fauzan', 20, 'L', 'Jakarta', '2007-01-20', 'Jl. Merdeka No.20', '081234567910', NOW()),
+(21, 25, 1, '2425101021', 'M. Ikmal Nur Fajar', 21, 'L', 'Jakarta', '2007-01-21', 'Jl. Merdeka No.21', '081234567911', NOW()),
+(22, 26, 1, '2425101022', 'M. Faza Faturrahman', 22, 'L', 'Jakarta', '2007-01-22', 'Jl. Merdeka No.22', '081234567912', NOW()),
+(23, 27, 1, '2425101023', 'M. Rasya Raka Pratama', 23, 'L', 'Jakarta', '2007-01-23', 'Jl. Merdeka No.23', '081234567913', NOW()),
+(24, 28, 1, '2425101024', 'Resti Indiani', 24, 'P', 'Jakarta', '2007-01-24', 'Jl. Merdeka No.24', '081234567914', NOW()),
+(25, 29, 1, '2425101025', 'Revan Ramadhan', 25, 'L', 'Jakarta', '2007-01-25', 'Jl. Merdeka No.25', '081234567915', NOW()),
+(26, 30, 1, '2425101026', 'Rian Rama Romansah', 26, 'L', 'Jakarta', '2007-01-26', 'Jl. Merdeka No.26', '081234567916', NOW()),
+(27, 31, 1, '2425101027', 'Rianto', 27, 'L', 'Jakarta', '2007-01-27', 'Jl. Merdeka No.27', '081234567917', NOW()),
+(28, 32, 1, '2425101028', 'Ridwan Sahidi Nugraha', 28, 'L', 'Jakarta', '2007-01-28', 'Jl. Merdeka No.28', '081234567918', NOW()),
+(29, 33, 1, '2425101029', 'Sandi Darma Kusuma', 29, 'L', 'Jakarta', '2007-01-29', 'Jl. Merdeka No.29', '081234567919', NOW()),
+(30, 34, 1, '2425101030', 'Sifa Nurul Insani', 30, 'P', 'Jakarta', '2007-01-30', 'Jl. Merdeka No.30', '081234567920', NOW()),
+(31, 35, 1, '2425101031', 'Syahrul Firmansyah', 31, 'L', 'Jakarta', '2007-01-31', 'Jl. Merdeka No.31', '081234567921', NOW()),
+(32, 36, 1, '2425101032', 'Yuniyasih', 32, 'P', 'Jakarta', '2007-02-01', 'Jl. Merdeka No.32', '081234567922', NOW()),
+(33, 37, 1, '2425101033', 'Rizal Herdiana Yuniar', 33, 'L', 'Jakarta', '2007-02-02', 'Jl. Merdeka No.33', '081234567923', NOW());
+
+-- =====================================================
+-- 8. VERIFIKASI DATA
+-- =====================================================
+SELECT '=== VERIFIKASI DATA ===' as '';
+SELECT 'users' as tabel, COUNT(*) as total FROM users
+UNION ALL SELECT 'kelas', COUNT(*) FROM kelas
+UNION ALL SELECT 'siswa', COUNT(*) FROM siswa
+UNION ALL SELECT 'agenda', COUNT(*) FROM agenda
+UNION ALL SELECT 'absensi_harian', COUNT(*) FROM absensi_harian
+UNION ALL SELECT 'detail_absensi', COUNT(*) FROM detail_absensi
+UNION ALL SELECT 'validasi_qr', COUNT(*) FROM validasi_qr;
+
+SELECT '=== DATA SISWA (XI RPL 1) ===' as '';
+SELECT nomor_absen, nis, nama_lengkap, jenis_kelamin FROM siswa ORDER BY nomor_absen ASC;
+
+-- =====================================================
+-- SELESAI
+-- =====================================================
